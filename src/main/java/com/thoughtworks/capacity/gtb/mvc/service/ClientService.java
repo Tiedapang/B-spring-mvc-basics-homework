@@ -23,7 +23,7 @@ public class ClientService {
         List<ClientDao> clientDaoList = clientDaoMap.values().stream()
                 .filter(clientDao1 -> clientDao1.getUsername().equals(clientDao1.getUsername())&&clientDao1.getPassword().equals(clientDao1.getPassword())&&clientDao1.getEmail().equals(clientDao1.getEmail()))
                 .collect(Collectors.toList());
-        if (clientDaoList!=null){
+        if (clientDaoList!=null||clientDaoList.size()==0){
             throw new ClientAlreadyExistException("用户已存在");
         }else{
             clientDao.setId(clientDaoMap.size()+1);
@@ -35,7 +35,7 @@ public class ClientService {
     public ClientDao login(String username, String password) {
         List<ClientDao> clientDaoList = clientDaoMap.values().stream()
                 .filter(clientDao -> clientDao.getUsername().equals(username)&&clientDao.getPassword().equals(password)).collect(Collectors.toList());
-        if(clientDaoList==null) {
+        if(clientDaoList==null || clientDaoList.size()==0) {
             throw new ClientNotFoundException("用户名或者密码错误");
         }else {
             return clientDaoList.get(0);

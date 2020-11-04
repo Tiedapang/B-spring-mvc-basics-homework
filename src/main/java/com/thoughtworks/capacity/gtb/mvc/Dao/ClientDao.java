@@ -16,7 +16,7 @@ public class ClientDao {
     @Size(min = 5,max = 12,message = "Invalid UserName")
     private String username;
     @NotBlank(message = "password not be blank")
-    @Pattern(regexp = "^[0-9a-zA-Z_]{5,12}$", message = "Invalid Password")
+    @Pattern(regexp = "^[0-9a-zA-Z_]{3,10}$", message = "Invalid Password")
     private String password;
     @NotBlank(message = "email not be blank")
     @Email(message = "Invalid email")
