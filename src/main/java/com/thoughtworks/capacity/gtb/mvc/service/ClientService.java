@@ -20,10 +20,16 @@ public class ClientService {
     public ClientService(){
     }
     public void createClient(ClientDao clientDao) {
-        if (clientDaoMap.get(clientDao.getId())!=null){
+        List<ClientDao> clientDaoList = clientDaoMap.values().stream()
+                .filter(clientDao1 -> clientDao1.getUsername().equals(clientDao1.getUsername())&&clientDao1.getPassword().equals(clientDao1.getPassword())&&clientDao1.getEmail().equals(clientDao1.getEmail()))
+                .collect(Collectors.toList());
+        if (clientDaoList!=null){
             throw new ClientAlreadyExistException("用户已存在");
-        };
-        clientDaoMap.put(clientDao.getId(), clientDao);
+        }else{
+            clientDao.setId(clientDaoMap.size()+1);
+            clientDaoMap.put(clientDao.getId(), clientDao);
+        }
+
     }
 
     public ClientDao login(String username, String password) {

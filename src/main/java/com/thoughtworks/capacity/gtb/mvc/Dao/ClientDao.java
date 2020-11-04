@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientDao {
-    @NotNull(message = "id must not be null")
+
     private int id;
     @NotBlank(message = "name must not be blank")
     @Size(min = 5,max = 12,message = "Invalid UserName")
